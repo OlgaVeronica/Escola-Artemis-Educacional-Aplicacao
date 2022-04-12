@@ -24,5 +24,28 @@ namespace AplicacaoEscola
         {
             InitializeComponent();
         }
+
+        private void btSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            string nomeFantasia = txtNomeFantasia.Text;
+            string cnpj = txtCnpj.Text;
+            string razaoSocial = txtRazaoSocial.Text;
+            string inscricaoEst = txtInscricaoEst.Text;
+            string nomeResp = txtNomeResp.Text;
+            string telefoneResp = txtTelefoneResp.Text;
+            string telefoneEscola = txtTelefoneEscola.Text;
+            string email = txtEmail.Text;
+            string rua = txtRua.Text;
+            string numero = txtNumero.Text;
+            string bairro = txtBairro.Text;
+            string complemento = txtComplemento.Text;
+            string cep = txtCep.Text;
+            ComboBox? estado = cbEstado.SelectedItem as ComboBox;
+            DatePicker dataCriacao = (DatePicker)dpDataCriacao.DataContext;
+            MessageBox.Show(nomeFantasia + "\n" + cnpj + "\n" + razaoSocial + "\n" + inscricaoEst + "\n" + nomeResp + "\n"
+                + telefoneResp + "\n" + telefoneEscola + "\n" + email + "\n" + rua + "\n" + numero + "\n" + bairro + "\n"
+                + complemento + "\n" + cep + "\n" + dataCriacao + "\n" + estado);
+                
+        }
     }
 }
