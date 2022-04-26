@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace AplicacaoEscola
 {
@@ -40,12 +41,45 @@ namespace AplicacaoEscola
             string bairro = txtBairro.Text;
             string complemento = txtComplemento.Text;
             string cep = txtCep.Text;
-            ComboBox? estado = cbEstado.SelectedItem as ComboBox;
-            DatePicker dataCriacao = (DatePicker)dpDataCriacao.DataContext;
-            MessageBox.Show(nomeFantasia + "\n" + cnpj + "\n" + razaoSocial + "\n" + inscricaoEst + "\n" + nomeResp + "\n"
-                + telefoneResp + "\n" + telefoneEscola + "\n" + email + "\n" + rua + "\n" + numero + "\n" + bairro + "\n"
-                + complemento + "\n" + cep + "\n" + dataCriacao + "\n" + estado);
-                
+            string cidade = txtCidade.Text;
+            string estado = cbEstado.Text;
+            var dataCriacao = dpDataCriacao.SelectedDate?.ToString("yyyy-MM-dd");
+            string tipo = rdPublica.IsChecked == true ? "Pública" : "Privada";
+            MessageBox.Show(" Nome: " + nomeFantasia +
+                            "\n CNPJ: " + cnpj +
+                            "\n Razão Social: " + razaoSocial +
+                            "\n Inscrição Estadual: " + inscricaoEst +
+                            "\n Tipo: " + tipo +
+                            "\n Data de Criação: " + dataCriacao +
+                            "\n Nome do Responsável: " + nomeResp +
+                            "\n Telefone do Responsável: " + telefoneResp +
+                            "\n Telefone da Escola: " + telefoneEscola +
+                            "\n Email: " + email +
+                            "\n Rua: " + rua +
+                            "\n Número: " + numero +
+                            "\n Bairro: " + bairro +
+                            "\n Complemento: " + complemento +
+                            "\n CEP: " + cep +
+                            "\n Cidade: " + cidade +
+                            "\n Estado: " + estado, "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            var conexao = new MySqlConnection("server=localhost;database=bd_escola_Artemis_Educacional;port=3360;user=root;password=root");
+
+            try
+            {
+                conexao.Open();
+                var comando = conexao.CreateCommand();
+                comando.CommandText = $"insert into Escola values(null, '{nomeFantasia}', '{razaoSocial}' , '{cnpj}', '{inscricaoEst}', '{tipo}', '{dataCriacao}', " +
+                    $"'{nomeResp}', '{telefoneResp}', '{email}', '{telefoneEscola}', '{rua}', {numero}, '{bairro}', '{complemento}', '{cep}', '{cidade}', '{estado}');";
+
+                var resultado = comando.ExecuteNonQuery();
+                if (resultado > 0)
+                    MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
