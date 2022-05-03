@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using AplicacaoEscola.Database;
 
 namespace AplicacaoEscola
 {
@@ -63,12 +64,12 @@ namespace AplicacaoEscola
                             "\n Cidade: " + cidade +
                             "\n Estado: " + estado, "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            var conexao = new MySqlConnection("server=localhost;database=bd_escola_Artemis_Educacional;port=3360;user=root;password=root");
+            
 
             try
             {
-                conexao.Open();
-                var comando = conexao.CreateCommand();
+                var conexao = new Conexao();
+                var comando = conexao.Query();
                 comando.CommandText = $"insert into Escola values(null, '{nomeFantasia}', '{razaoSocial}' , '{cnpj}', '{inscricaoEst}', '{tipo}', '{dataCriacao}', " +
                     $"'{nomeResp}', '{telefoneResp}', '{email}', '{telefoneEscola}', '{rua}', {numero}, '{bairro}', '{complemento}', '{cep}', '{cidade}', '{estado}');";
 

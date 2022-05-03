@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Formularios\" />
+    <PackageReference Include="MySql.Data" Version="8.0.29" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.0.29" />
+    <Folder Include="Views\" />
   </ItemGroup>
 
 </Project>
