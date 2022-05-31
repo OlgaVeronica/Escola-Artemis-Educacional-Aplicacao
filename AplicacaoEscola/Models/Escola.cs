@@ -8,6 +8,7 @@ namespace AplicacaoEscola.Models
 {
     internal class Escola
     {
+        public int Id { get; set; } = 0;
         public string NomeFantasia { get; set; }
         public string Cnpj { get; set; }
         public string RazaoSocial { get; set; }
@@ -16,7 +17,7 @@ namespace AplicacaoEscola.Models
         public string TelefoneResp { get; set; }
         public string TelefoneEscola { get; set; }
         public string Email { get; set; }
-        public string DataCriacao { get; set; }
+        public DateTime? DataCriacao { get; set; }
         public string Rua { get; set; }
         public int Numero { get; set; }
         public string Bairro { get; set; }
