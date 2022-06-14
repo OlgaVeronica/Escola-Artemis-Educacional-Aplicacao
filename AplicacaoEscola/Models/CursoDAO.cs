@@ -18,7 +18,7 @@ namespace AplicacaoEscola.Models
             try
             {
                 var comando = _conn.Query();
-                comando.CommandText = $"insert into Escola values(null, @nomeCurso, @cargaHoraria, @descricao, @turno);";
+                comando.CommandText = $"insert into Curso values(null, @nomeCurso, @cargaHoraria, @descricao, @turno);";
 
                 comando.Parameters.AddWithValue("@nomeCurso", curso.NomeCurso);
                 comando.Parameters.AddWithValue("@cargaHoraria", curso.CargaHoraria);
@@ -81,6 +81,7 @@ namespace AplicacaoEscola.Models
                     curso.Turno = DAOHelper.GetString(reader, "turno_cur");
                     lista.Add(curso);
                 }
+                reader.Close();
                 return lista;
             }
             catch (Exception)

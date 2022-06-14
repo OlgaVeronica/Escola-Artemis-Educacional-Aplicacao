@@ -114,6 +114,7 @@ namespace AplicacaoEscola.Models
                     lista.Add(escola);
                 }
 
+                reader.Close();
                 return lista;
             }
             catch (Exception)

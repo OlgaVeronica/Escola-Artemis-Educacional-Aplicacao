@@ -28,9 +28,16 @@ namespace AplicacaoEscola
             InitializeComponent();
         }
 
-        private void btChamarCadastro_Click(object sender, RoutedEventArgs e)
+        private void btChamarCadastroEscola_Click(object sender, RoutedEventArgs e)
         {
             CadastroEscola cadastro = new CadastroEscola();
+            cadastro.ShowDialog();
+            this.Close();
+        }
+
+        private void btChamarCadastroCurso_Click(object sender, RoutedEventArgs e)
+        {
+            CadastroCurso cadastro = new CadastroCurso();
             cadastro.ShowDialog();
             this.Close();
         }

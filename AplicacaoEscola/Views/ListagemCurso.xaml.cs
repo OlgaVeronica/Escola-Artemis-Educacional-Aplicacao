@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using AplicacaoEscola.Models;
 
 namespace AplicacaoEscola.Views
 {
@@ -22,6 +23,58 @@ namespace AplicacaoEscola.Views
         public ListagemCurso()
         {
             InitializeComponent();
+            Loaded += ListagemCurso_Loaded;
+        }
+
+        public void ListagemCurso_Loaded(object sender, RoutedEventArgs e)
+        {
+            CarregarListagem();
+        }
+
+        private void CarregarListagem()
+        {
+            try
+            {
+                var dao = new CursoDAO();
+                List<Curso> listarCursos = dao.List();
+
+                dataGridCurso.ItemsSource = listarCursos;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Falha na listagem");
+            }
+        }
+
+        private void Button_Remover_Click(object sender, RoutedEventArgs e)
+        {
+            var cursoSelecionado = dataGridCurso.SelectedItem as Curso;
+            var resultado = MessageBox.Show($"Deseja realmente excluir \"{cursoSelecionado}\" dos registros?", "Confirmação de Exclusão",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+
+            try
+            {
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    var dao = new CursoDAO();
+                    dao.Delete(cursoSelecionado);
+
+                    MessageBox.Show("Registro Removido com Sucesso!");
+                }
+                CarregarListagem();
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private void Button_Atualizar_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

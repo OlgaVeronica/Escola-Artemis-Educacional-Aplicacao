@@ -33,7 +33,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="Atualizar Registro" Margin="5 0" x:Name="Atualizar" Click="Button_Atualizar_Click"/>
-                                <Button Content="RemoverRegistro" Margin="5 0" x:Name="Remover" Click="Button_Remover_Click"/>
+                                <Button Content="Remover Registro" Margin="5 0" x:Name="Remover" Click="Button_Remover_Click"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

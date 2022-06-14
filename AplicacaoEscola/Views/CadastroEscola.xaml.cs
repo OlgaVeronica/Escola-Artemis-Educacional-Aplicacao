@@ -77,7 +77,6 @@ namespace AplicacaoEscola.Views
             rdPrivada.IsChecked = false;
             rdPublica.IsChecked = false;
 
-
             ListagemEscola listagem = new ListagemEscola();
             listagem.ShowDialog();
         }

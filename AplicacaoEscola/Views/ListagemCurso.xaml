@@ -7,6 +7,33 @@
         mc:Ignorable="d"
         Title="ListagemCurso" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Listagem de Cursos" FontSize="24" Padding="10"/>
+        <DataGrid Grid.Row="1" x:Name="dataGridCurso" FontSize="15px" AutoGenerateColumns="False" 
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  AlternatingRowBackground="#f2f2f2" AlternationCount="2" CanUserReorderColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Nome" Binding="{Binding NomeCurso}" />
+                <DataGridTextColumn Header="Carga Horaria" Binding="{Binding CargaHoraria}" />
+                <DataGridTextColumn Header="Turno" Binding="{Binding Turno}" />
+                <DataGridTemplateColumn Header="Ações">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Atualizar Registro" Margin="5 0" x:Name="Atualizar" Click="Button_Atualizar_Click"/>
+                                <Button Content="Remover Registro" Margin="5 0" x:Name="Remover" Click="Button_Remover_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>
