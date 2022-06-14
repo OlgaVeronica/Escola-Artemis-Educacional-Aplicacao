@@ -33,13 +33,16 @@ namespace AplicacaoEscola.Views
 
         private void Button_Atualizar_Click(object sender, RoutedEventArgs e)
         {
-
+            var escolaSelect = dataGridEscola.SelectedItem as Escola;
+            var form = new CadastroEscola(escolaSelect);
+            form.ShowDialog();
+                
         }
         private void Button_Remover_Click(object sender, RoutedEventArgs e)
         {
             var escolaSelecionada = dataGridEscola.SelectedItem as Escola;
 
-            var resultado = MessageBox.Show($"Deseja realmente excluir \"{escolaSelecionada}\" dos registros?", "Confirmação de Exclusão",
+            var resultado = MessageBox.Show($"Deseja realmente excluir \"{escolaSelecionada.NomeFantasia}\" dos registros?", "Confirmação de Exclusão",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             try

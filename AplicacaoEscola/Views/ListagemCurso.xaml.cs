@@ -50,7 +50,7 @@ namespace AplicacaoEscola.Views
         private void Button_Remover_Click(object sender, RoutedEventArgs e)
         {
             var cursoSelecionado = dataGridCurso.SelectedItem as Curso;
-            var resultado = MessageBox.Show($"Deseja realmente excluir \"{cursoSelecionado}\" dos registros?", "Confirmação de Exclusão",
+            var resultado = MessageBox.Show($"Deseja realmente excluir \"{cursoSelecionado.NomeCurso}\" dos registros?", "Confirmação de Exclusão",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
 
@@ -61,7 +61,7 @@ namespace AplicacaoEscola.Views
                     var dao = new CursoDAO();
                     dao.Delete(cursoSelecionado);
 
-                    MessageBox.Show("Registro Removido com Sucesso!");
+                    MessageBox.Show("Registro Removido com Sucesso!", "PDS - 2022", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 CarregarListagem();
 
@@ -74,7 +74,9 @@ namespace AplicacaoEscola.Views
         }
         private void Button_Atualizar_Click(object sender, RoutedEventArgs e)
         {
-
+            var cursoSelect = dataGridCurso.SelectedItem as Curso;
+            var form = new CadastroCurso(cursoSelect);
+            form.ShowDialog();
         }
     }
 }

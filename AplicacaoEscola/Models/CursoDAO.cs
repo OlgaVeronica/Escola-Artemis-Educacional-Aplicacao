@@ -37,6 +37,31 @@ namespace AplicacaoEscola.Models
             }
         }
 
+        public void Update(Curso curso)
+        {
+            try
+            {
+                var comando = _conn.Query();
+                comando.CommandText = $"update Curso set nome_curso_cur = @nomeCurso, carga_horaria_cur = @cargaHoraria, descricao_cur = @descricao, turno_cur = @turno where id_cur = @id;";
+
+                comando.Parameters.AddWithValue("@nomeCurso", curso.NomeCurso);
+                comando.Parameters.AddWithValue("@cargaHoraria", curso.CargaHoraria);
+                comando.Parameters.AddWithValue("@descricao", curso.Descricao);
+                comando.Parameters.AddWithValue("@turno", curso.Turno);
+                comando.Parameters.AddWithValue("@id", curso.Id);
+
+                var resultado = comando.ExecuteNonQuery();
+                if (resultado == 0)
+                {
+                    throw new Exception("Ocorreram erros ao salvar as informações");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void Delete(Curso curso)
         {
             try

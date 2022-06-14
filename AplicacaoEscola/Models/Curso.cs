@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AplicacaoEscola.Models
 {
-    internal class Curso
+    public class Curso
     {
         public int Id { get; set; } = 0;
         public string NomeCurso { get; set; }

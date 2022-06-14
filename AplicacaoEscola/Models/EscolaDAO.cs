@@ -18,8 +18,8 @@ namespace AplicacaoEscola.Models
             try
             {
                 var comando = _conn.Query();
-                comando.CommandText = $"insert into Escola values(null, @nomeFan, @razaoSoc, @cnpj, @inscEst, @tipo, @data, @nomeResp, @telResp, @telEsc," +
-                    $"@emailEsc, @rua, @numRua, @bairro, @cep, @complemento, @cidade, @estado);";
+                comando.CommandText = "insert into Escola values(null, @nomeFan, @razaoSoc, @cnpj, @inscEst, @tipo, @data, @nomeResp, @telResp, @telEsc," +
+                    "@emailEsc, @rua, @numRua, @bairro, @cep, @complemento, @cidade, @estado);";
 
                 comando.Parameters.AddWithValue("@nomeFan", escola.NomeFantasia);
                 comando.Parameters.AddWithValue("@razaoSoc", escola.RazaoSocial);
@@ -38,6 +38,49 @@ namespace AplicacaoEscola.Models
                 comando.Parameters.AddWithValue("@complemento", escola.Complemento);
                 comando.Parameters.AddWithValue("@cidade", escola.Cidade);
                 comando.Parameters.AddWithValue("@estado", escola.Estado);
+
+
+                var resultado = comando.ExecuteNonQuery();
+                if (resultado == 0)
+                {
+                    throw new Exception("Ocorreram erros ao salvar as informações");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Update(Escola escola)
+        {
+            try
+            {
+                var comando = _conn.Query();
+                comando.CommandText = $"update Escola set nome_fantasia_esc = @nomeFan, razao_social_esc = @razaoSoc, " +
+                    $"cnpj_esc = @cnpj, insc_esc = @inscEst, tipo_esc = @tipo, data_criacao_esc = @data, " +
+                    $"responsavel_esc = @nomeResp, responsavel_telefone_escola_esc = @telResp, telefone_esc = @telEsc," +
+                    $"email_esc = @emailEsc, rua_esc = @rua, numero_esc = @numRua, bairro_esc = @bairro, " +
+                    $"cep_esc = @cep, complemento_esc = @complemento, cidade_esc = @cidade, estado_esc = @estado where id_esc = @id;";
+
+                comando.Parameters.AddWithValue("@nomeFan", escola.NomeFantasia);
+                comando.Parameters.AddWithValue("@razaoSoc", escola.RazaoSocial);
+                comando.Parameters.AddWithValue("@cnpj", escola.Cnpj);
+                comando.Parameters.AddWithValue("@inscEst", escola.InscricaoEst);
+                comando.Parameters.AddWithValue("@tipo", escola.Tipo);
+                comando.Parameters.AddWithValue("@data", escola.DataCriacao);
+                comando.Parameters.AddWithValue("@nomeResp", escola.NomeResp);
+                comando.Parameters.AddWithValue("@telResp", escola.TelefoneResp);
+                comando.Parameters.AddWithValue("@telEsc", escola.TelefoneEscola);
+                comando.Parameters.AddWithValue("@emailEsc", escola.Email);
+                comando.Parameters.AddWithValue("@rua", escola.Rua);
+                comando.Parameters.AddWithValue("@numRua", escola.Numero);
+                comando.Parameters.AddWithValue("@bairro", escola.Bairro);
+                comando.Parameters.AddWithValue("@cep", escola.Cep);
+                comando.Parameters.AddWithValue("@complemento", escola.Complemento);
+                comando.Parameters.AddWithValue("@cidade", escola.Cidade);
+                comando.Parameters.AddWithValue("@estado", escola.Estado);
+                comando.Parameters.AddWithValue("@id", escola.Id);
 
 
                 var resultado = comando.ExecuteNonQuery();
@@ -75,7 +118,6 @@ namespace AplicacaoEscola.Models
                 throw;
             }
         }
-
 
         public List<Escola> List()
         {

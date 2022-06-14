@@ -32,14 +32,26 @@ namespace AplicacaoEscola
         {
             CadastroEscola cadastro = new CadastroEscola();
             cadastro.ShowDialog();
-            this.Close();
+            //this.Close();
         }
 
         private void btChamarCadastroCurso_Click(object sender, RoutedEventArgs e)
         {
             CadastroCurso cadastro = new CadastroCurso();
             cadastro.ShowDialog();
-            this.Close();
+            //this.Close();
+        }
+
+        private void btChamarListagemEscola_Click(object sender, RoutedEventArgs e)
+        {
+            ListagemEscola listagem = new ListagemEscola();
+            listagem.ShowDialog();
+        }
+
+        private void btChamarListagemCurso_Click(object sender, RoutedEventArgs e)
+        {
+            ListagemCurso listagem = new ListagemCurso();
+            listagem.ShowDialog();
         }
     }
 }

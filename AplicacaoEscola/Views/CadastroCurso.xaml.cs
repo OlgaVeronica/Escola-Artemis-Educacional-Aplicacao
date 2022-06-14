@@ -22,15 +22,30 @@ namespace AplicacaoEscola.Views
     /// </summary>
     public partial class CadastroCurso : Window
     {
-
+        private Curso _curso = new Curso();
         public CadastroCurso()
         {
             InitializeComponent();
+            //Loaded += CadastroCurso_Loaded;
+        }
+
+        public CadastroCurso(Curso curso)
+        {
+            InitializeComponent();
+            Loaded += CadastroCurso_Loaded;
+            _curso = curso;
+        }
+
+        private void CadastroCurso_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtNomeCurso.Text = _curso.NomeCurso;
+            txtCargaHoraria.Text = _curso.CargaHoraria;
+            txtDescricaoCurso.Text = _curso.Descricao;
+            cbTurno.Text = _curso.Turno;
         }
 
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
-            Curso _curso = new Curso();
             _curso.NomeCurso = txtNomeCurso.Text;
             _curso.CargaHoraria = txtCargaHoraria.Text;
             _curso.Descricao = txtDescricaoCurso.Text;
@@ -39,16 +54,24 @@ namespace AplicacaoEscola.Views
             try
             {
                 var dao = new CursoDAO();
-                dao.Insert(_curso);
-                MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                if(_curso.Id > 0)
+                {
+                    dao.Update(_curso);
+                    MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    dao.Insert(_curso);
+                    MessageBox.Show("Registro atualizado com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
     
-            ListagemCurso listagem = new ListagemCurso();
-            listagem.ShowDialog();
+            //ListagemCurso listagem = new ListagemCurso();
+            //listagem.ShowDialog();
 
             txtCargaHoraria.Clear();
             txtDescricaoCurso.Clear();

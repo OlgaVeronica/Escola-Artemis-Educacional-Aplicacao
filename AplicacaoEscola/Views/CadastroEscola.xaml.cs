@@ -27,6 +27,42 @@ namespace AplicacaoEscola.Views
         public CadastroEscola()
         {
             InitializeComponent();
+            Loaded += CadastroEscola_Loaded;
+        }
+
+        public CadastroEscola (Escola escola)
+        {
+            InitializeComponent();
+            Loaded += CadastroEscola_Loaded;
+            _escola = escola;
+        }
+
+        private void CadastroEscola_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtNomeFantasia.Text = _escola.NomeFantasia;
+            txtCnpj.Text = _escola.Cnpj;
+            txtRazaoSocial.Text = _escola.RazaoSocial;
+            txtInscricaoEst.Text = _escola.InscricaoEst;
+            txtNomeResp.Text = _escola.NomeResp;
+            txtTelefoneResp.Text = _escola.TelefoneResp;
+            txtTelefoneEscola.Text = _escola.TelefoneEscola;
+            txtEmail.Text = _escola.Email;
+            txtRua.Text = _escola.Rua;
+            txtNumero.Text = _escola.Numero.ToString();
+            txtBairro.Text = _escola.Bairro;
+            txtComplemento.Text = _escola.Complemento;
+            txtCep.Text = _escola.Cep;
+            txtCidade.Text = _escola.Cidade;
+            cbEstado.Text = _escola.Estado;
+            dpDataCriacao.SelectedDate = _escola.DataCriacao;
+            if(_escola.Tipo == "Publica")
+            {
+                rdPublica.IsChecked = true;
+            }
+            else
+            {
+                rdPrivada.IsChecked = true;
+            }
         }
 
         private void btSalvar_Click(object sender, RoutedEventArgs e)
@@ -52,8 +88,17 @@ namespace AplicacaoEscola.Views
             try
             {
                 var dao = new EscolaDAO();
-                dao.Insert(_escola);
-                MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                if(_escola.Id > 0)
+                {
+                    dao.Update(_escola);
+                    MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    dao.Insert(_escola);
+                    MessageBox.Show("Registro atualizado com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -77,8 +122,8 @@ namespace AplicacaoEscola.Views
             rdPrivada.IsChecked = false;
             rdPublica.IsChecked = false;
 
-            ListagemEscola listagem = new ListagemEscola();
-            listagem.ShowDialog();
+            //ListagemEscola listagem = new ListagemEscola();
+            //listagem.ShowDialog();
         }
     }
 }

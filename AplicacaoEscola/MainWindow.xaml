@@ -9,8 +9,10 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="btChamarCadastroEscola" Content="TELA CADASTRO ESCOLA" HorizontalAlignment="Center" VerticalAlignment="Top" Height="172" Width="410" Click="btChamarCadastroEscola_Click" Margin="0,171,0,0"/>
-        <Button x:Name="btChamarCadastroCurso" Content="TELA CADASTRO CURSO" HorizontalAlignment="Center" VerticalAlignment="Top" Height="172" Width="410" Click="btChamarCadastroCurso_Click" Margin="0,392,0,0"/>
+        <Button x:Name="btChamarCadastroEscola" Content="TELA CADASTRO ESCOLA" HorizontalAlignment="Center" VerticalAlignment="Top" Height="95" Width="410" Click="btChamarCadastroEscola_Click" Margin="0,171,0,0"/>
+        <Button x:Name="btChamarCadastroCurso" Content="TELA CADASTRO CURSO" HorizontalAlignment="Center" VerticalAlignment="Top" Height="95" Width="410" Click="btChamarCadastroCurso_Click" Margin="0,474,0,0"/>
+        <Button x:Name="btChamarListagemEscola" Content="TELA LISTAGEM ESCOLA" HorizontalAlignment="Center" VerticalAlignment="Top" Height="95" Width="410" Click="btChamarListagemEscola_Click" Margin="0,297,0,0"/>
+        <Button x:Name="btChamarListagemCurso" Content="TELA LISTAGEM CURSO" HorizontalAlignment="Center" VerticalAlignment="Top" Height="95" Width="410" Click="btChamarListagemCurso_Click" Margin="0,600,0,0"/>
 
     </Grid>
 </Window>
