@@ -28,6 +28,41 @@ namespace AplicacaoEscola.Views
 
         private void ListagemEscola_Loaded(object sender, RoutedEventArgs e)
         {
+            CarregarLista();
+        }
+
+        private void Button_Atualizar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Button_Remover_Click(object sender, RoutedEventArgs e)
+        {
+            var escolaSelecionada = dataGridEscola.SelectedItem as Escola;
+
+            var resultado = MessageBox.Show($"Deseja realmente excluir \"{escolaSelecionada}\" dos registros?", "Confirmação de Exclusão",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            try
+            {
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    var dao = new EscolaDAO();
+                    dao.Delete(escolaSelecionada);
+
+                    MessageBox.Show("Registro Removido com Sucesso!");
+                }
+                CarregarLista();
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void CarregarLista()
+        {
             try
             {
                 var dao = new EscolaDAO();
@@ -41,5 +76,6 @@ namespace AplicacaoEscola.Views
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

@@ -14,6 +14,32 @@
 
         <TextBlock Grid.Row="0" Text="Listagem de Escolas" FontSize="24" Padding="10"/>
 
-        <DataGrid Grid.Row="1" x:Name="dataGridEscola" />
+        <DataGrid Grid.Row="1" x:Name="dataGridEscola" FontSize="15px" AutoGenerateColumns="False" 
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  AlternatingRowBackground="#f2f2f2" AlternationCount="2" CanUserReorderColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Nome Fantasia" Binding="{Binding NomeFantasia}" />
+                <DataGridTextColumn Header="CNPJ" Binding="{Binding Cnpj}" />
+                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Telefone" Binding="{Binding TelefoneEscola}" />
+                <DataGridTextColumn Header="Responsável" Binding="{Binding NomeResp}" />
+                <DataGridTextColumn Header="Telefone do Responsável" Binding="{Binding TelefoneResp}" />
+
+                <DataGridTemplateColumn Header="Ações">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Atualizar Registro" Margin="5 0" x:Name="Atualizar" Click="Button_Atualizar_Click"/>
+                                <Button Content="RemoverRegistro" Margin="5 0" x:Name="Remover" Click="Button_Remover_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
     </Grid>
 </Window>

@@ -51,6 +51,32 @@ namespace AplicacaoEscola.Models
                 throw;
             }
         }
+
+        public void Delete(Escola escola)
+        {
+            try
+            {
+
+                Conexao conn = new Conexao();
+                var comando = conn.Query();
+
+                comando.CommandText = "delete from escola where id_esc = @id";
+
+                comando.Parameters.AddWithValue("@id", escola.Id);
+                var resultado = comando.ExecuteNonQuery();
+
+                if (resultado == 0)
+                {
+                    throw new Exception("Erro ao Apagar os dados do Banco de dados");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         public List<Escola> List()
         {
             try
