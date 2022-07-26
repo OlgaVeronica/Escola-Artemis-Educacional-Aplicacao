@@ -36,6 +36,7 @@ namespace AplicacaoEscola.Views
             var escolaSelect = dataGridEscola.SelectedItem as Escola;
             var form = new CadastroEscola(escolaSelect);
             form.ShowDialog();
+            this.Close();
                 
         }
         private void Button_Remover_Click(object sender, RoutedEventArgs e)

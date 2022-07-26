@@ -77,6 +77,7 @@ namespace AplicacaoEscola.Views
             var cursoSelect = dataGridCurso.SelectedItem as Curso;
             var form = new CadastroCurso(cursoSelect);
             form.ShowDialog();
+            this.Close();
         }
     }
 }

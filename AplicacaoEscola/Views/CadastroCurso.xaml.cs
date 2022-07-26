@@ -57,12 +57,15 @@ namespace AplicacaoEscola.Views
                 if(_curso.Id > 0)
                 {
                     dao.Update(_curso);
-                    MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Registro atualizado com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                    ListagemCurso listagem = new ListagemCurso();
+                    listagem.ShowDialog();
                 }
                 else
                 {
                     dao.Insert(_curso);
-                    MessageBox.Show("Registro atualizado com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
