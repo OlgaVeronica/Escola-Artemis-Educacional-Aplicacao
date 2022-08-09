@@ -18,13 +18,13 @@ namespace AplicacaoEscola.Models
             try
             {
                 var comando = _conn.Query();
-                comando.CommandText = $"insert into Curso values(null, @nomeCurso, @cargaHoraria, @descricao, @turno);";
+                comando.CommandText = $"insert into Curso values(null, @nomeCurso, @cargaHoraria, @descricao, @turno, @escola_id);";
 
                 comando.Parameters.AddWithValue("@nomeCurso", curso.NomeCurso);
                 comando.Parameters.AddWithValue("@cargaHoraria", curso.CargaHoraria);
                 comando.Parameters.AddWithValue("@descricao", curso.Descricao);
                 comando.Parameters.AddWithValue("@turno", curso.Turno);
-
+                comando.Parameters.AddWithValue("@escola_id", curso.Escola.Id);
                 var resultado = comando.ExecuteNonQuery();
                 if (resultado == 0)
                 {
@@ -91,7 +91,7 @@ namespace AplicacaoEscola.Models
                 var lista = new List<Curso>();
                 var comando = _conn.Query();
 
-                comando.CommandText = "SELECT * FROM curso";
+                comando.CommandText = "select curso.*, escola.nome_fantasia_esc from curso, escola where(curso.id_esc_fk = escola.id_esc)";
 
                 MySqlDataReader reader = comando.ExecuteReader();
 
@@ -104,6 +104,9 @@ namespace AplicacaoEscola.Models
                     curso.CargaHoraria = DAOHelper.GetString(reader, "carga_horaria_cur");
                     curso.Descricao = DAOHelper.GetString(reader, "descricao_cur");
                     curso.Turno = DAOHelper.GetString(reader, "turno_cur");
+                    curso.Escola = new Escola();
+                    curso.Escola.Id = DAOHelper.GetInt(reader,"id_esc_fk");
+                    curso.Escola.NomeFantasia = DAOHelper.GetString(reader, "nome_fantasia_esc");
                     lista.Add(curso);
                 }
                 reader.Close();

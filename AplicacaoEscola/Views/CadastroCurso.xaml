@@ -35,6 +35,8 @@
                     <ComboBoxItem>Vespertino</ComboBoxItem>
                     <ComboBoxItem>Noturno</ComboBoxItem>
                 </ComboBox>
+                <Label Content="Escola:" FontSize="25" Margin="100 0 20 0" Height="42" />
+                <ComboBox x:Name="cbEscola" Height="34" BorderBrush="Black" Width="358" DisplayMemberPath="NomeFantasia" SelectedValuePath="Id"></ComboBox>
             </StackPanel>
         </StackPanel>
         

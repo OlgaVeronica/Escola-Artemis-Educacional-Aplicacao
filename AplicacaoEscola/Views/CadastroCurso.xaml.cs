@@ -26,7 +26,7 @@ namespace AplicacaoEscola.Views
         public CadastroCurso()
         {
             InitializeComponent();
-            //Loaded += CadastroCurso_Loaded;
+            Loaded += CadastroCurso_Loaded;
         }
 
         public CadastroCurso(Curso curso)
@@ -42,6 +42,8 @@ namespace AplicacaoEscola.Views
             txtCargaHoraria.Text = _curso.CargaHoraria;
             txtDescricaoCurso.Text = _curso.Descricao;
             cbTurno.Text = _curso.Turno;
+            cbEscola.SelectedItem = _curso.Escola;
+            CarregarLista();
         }
 
         private void btSalvar_Click(object sender, RoutedEventArgs e)
@@ -50,28 +52,36 @@ namespace AplicacaoEscola.Views
             _curso.CargaHoraria = txtCargaHoraria.Text;
             _curso.Descricao = txtDescricaoCurso.Text;
             _curso.Turno = cbTurno.Text;
-       
-            try
+            if (cbEscola.SelectedItem != null) _curso.Escola = cbEscola.SelectedItem as Escola;
+            
+
+
+            if (!string.IsNullOrWhiteSpace(txtNomeCurso.Text) || string.IsNullOrWhiteSpace(cbEscola.Text))
             {
-                var dao = new CursoDAO();
-                if(_curso.Id > 0)
+                try
                 {
-                    dao.Update(_curso);
-                    MessageBox.Show("Registro atualizado com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
-                    ListagemCurso listagem = new ListagemCurso();
-                    listagem.ShowDialog();
+                    var dao = new CursoDAO();
+                    if (_curso.Id > 0)
+                    {
+                        dao.Update(_curso);
+                        MessageBox.Show("Registro atualizado com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                        ListagemCurso listagem = new ListagemCurso();
+                        listagem.ShowDialog();
+                    }
+                    else
+                    {
+                        dao.Insert(_curso);
+                        MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    dao.Insert(_curso);
-                    MessageBox.Show("Registro inserido com sucesso!", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            else
+                MessageBox.Show("Insira as informações corretamente", "PDS - 2º Bimestre", MessageBoxButton.OK, MessageBoxImage.Exclamation);
     
             //ListagemCurso listagem = new ListagemCurso();
             //listagem.ShowDialog();
@@ -80,6 +90,22 @@ namespace AplicacaoEscola.Views
             txtDescricaoCurso.Clear();
             txtNomeCurso.Clear();
             cbTurno.SelectedIndex = -1;
+            cbEscola.SelectedIndex = -1;
+        }
+        private void CarregarLista()
+        {
+            try
+            {
+                var dao = new EscolaDAO();
+                List<Escola> listaEscolas = dao.List();
+
+                cbEscola.ItemsSource = listaEscolas;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
